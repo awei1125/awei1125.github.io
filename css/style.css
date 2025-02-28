@@ -421,7 +421,7 @@ form .row:first-child .floating-label-form-group {
 .pager .disabled > a:focus,
 .pager .disabled > span {
   color: #808080;
-  background-color: #BF9673;
+  background-color: #f5e5d2;
   cursor: not-allowed;
 }
 ::-moz-selection {
