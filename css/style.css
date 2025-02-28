@@ -33,7 +33,7 @@ h6,
 }
 body {
   font-size: 20px;
-  color: #F2E5D5;
+  color: #BF9673;
 }
 p {
   line-height: 1.5;
@@ -52,7 +52,7 @@ h6 {
   font-weight: 800;
 }
 a {
-  color: #D9B282;
+  color: #F2E5D5;
 }
 a:hover,
 a:focus {
@@ -421,7 +421,7 @@ form .row:first-child .floating-label-form-group {
 .pager .disabled > a:focus,
 .pager .disabled > span {
   color: #808080;
-  background-color: #F2E5D5;
+  background-color: #BF9673;
   cursor: not-allowed;
 }
 ::-moz-selection {
