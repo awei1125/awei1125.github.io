@@ -52,11 +52,11 @@ h6 {
   font-weight: 800;
 }
 a {
-  color: #BF9673;
+  color: #F2E5D5;
 }
 a:hover,
 a:focus {
-  color: #736D62;
+  color: #0085a1;
 }
 a img:hover,
 a img:focus {
@@ -139,7 +139,7 @@ hr.small {
   }
   .navbar-custom.is-fixed .navbar-brand:hover,
   .navbar-custom.is-fixed .navbar-brand:focus {
-    color: #736D62;
+    color: #0085a1;
   }
   .navbar-custom.is-fixed .nav li a {
     color: #404040;
@@ -179,7 +179,7 @@ hr.small {
 .intro-header .site-heading.archives,
 .intro-header .post-heading.archives,
 .intro-header .page-heading.archives {
-  color: #736D62;
+  color: #0085a1;
   margin-top: 60px;
 }
 .intro-header .site-heading,
@@ -270,7 +270,7 @@ hr.small {
 }
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {
-  color: #0085a1;
+  color: #736D62;
   text-decoration: underline;
 }
 @media only screen and (min-width: 768px) {
