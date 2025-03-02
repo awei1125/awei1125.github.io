@@ -139,7 +139,7 @@ hr.small {
   }
   .navbar-custom.is-fixed .navbar-brand:hover,
   .navbar-custom.is-fixed .navbar-brand:focus {
-    color: #0085a1;
+    color: #736D62;
   }
   .navbar-custom.is-fixed .nav li a {
     color: #404040;
@@ -179,7 +179,7 @@ hr.small {
 .intro-header .site-heading.archives,
 .intro-header .post-heading.archives,
 .intro-header .page-heading.archives {
-  color: #0085a1;
+  color: #736D62;
   margin-top: 60px;
 }
 .intro-header .site-heading,
