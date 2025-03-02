@@ -393,8 +393,8 @@ form .row:first-child .floating-label-form-group {
 }
 .btn-default:hover,
 .btn-default:focus {
-  background-color: #736D62;
-  border: 1px solid #736D62;
+  background-color: #0085a1;
+  border: 1px solid #0085a1;
   color: #fff;
 }
 .pager {
@@ -427,12 +427,12 @@ form .row:first-child .floating-label-form-group {
 ::-moz-selection {
   color: #fff;
   text-shadow: none;
-  background: #0085a1;
+  background: #736D62;
 }
 ::selection {
   color: #fff;
   text-shadow: none;
-  background: #0085a1;
+  background: #736D62;
 }
 img::selection {
   color: #fff;
