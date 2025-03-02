@@ -270,7 +270,7 @@ hr.small {
 }
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {
-  color: #0085a1;
+  color: #736D62;
   text-decoration: underline;
 }
 @media only screen and (min-width: 768px) {
@@ -393,8 +393,8 @@ form .row:first-child .floating-label-form-group {
 }
 .btn-default:hover,
 .btn-default:focus {
-  background-color: #0085a1;
-  border: 1px solid #0085a1;
+  background-color: #736D62;
+  border: 1px solid #736D62;
   color: #fff;
 }
 .pager {
@@ -413,8 +413,8 @@ form .row:first-child .floating-label-form-group {
 .pager li > a:hover,
 .pager li > a:focus {
   color: #fff;
-  background-color: #0085a1;
-  border: 1px solid #0085a1;
+  background-color: #736D62;
+  border: 1px solid #736D62;
 }
 .pager .disabled > a,
 .pager .disabled > a:hover,
