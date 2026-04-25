@@ -3,27 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ByteLog — 技術筆記</title>
+<title>Awei's Blog</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 
 </head>
-<body>
+<body id="top">
 
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a href="/" class="logo">
+    <a href="/" class="logo" aria-label="回到首頁">
       <span class="logo-dot"></span>
-      ByteLog
+      Awei's Blog
     </a>
     <nav>
-      <a href="#" class="active">文章</a>
-      <a href="#">分類</a>
-      <a href="#">專案</a>
-      <a href="#">關於</a>
+      <a href="/post/">文章</a>
+      <a href="/about/">關於</a>
     </nav>
     <div class="header-actions">
       <div class="search-wrap" style="display:none;" id="search-wrap">
@@ -33,13 +31,17 @@
       <button class="btn-theme" onclick="toggleSearch()" title="搜尋">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
+      <button class="btn-write" id="compose-open" type="button" hidden>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        撰寫
+      </button>
       <div class="theme-pill" onclick="toggleDark()" id="theme-pill" title="切換主題">
         <div class="pill-track is-dark" id="pill-track">
           <div class="pill-knob"></div>
         </div>
         <span class="pill-label" id="pill-label">深色</span>
       </div>
-      <button class="btn-rss">RSS</button>
+      <button class="btn-rss" type="button">RSS</button>
     </div>
   </div>
 </header>
@@ -53,7 +55,7 @@
       Rust 最令人印象深刻的特性之一，就是在不需要垃圾回收的情況下保證記憶體安全。本文帶你從 borrow checker 的核心邏輯出發，理解 lifetime 標注的真正意義。
     </p>
     <div class="hero-meta">
-      <a href="#" class="read-more">
+      <a href="/post/system-programming/rust-ownership/" class="read-more">
         閱讀全文
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
@@ -95,7 +97,7 @@
 
 <!-- MAIN -->
 <div class="main-wrap">
-  <main>
+  <main id="articles" tabindex="-1">
     <!-- Featured + Grid -->
     <div class="section-header">
       <span class="section-title">最新文章</span>
@@ -104,7 +106,7 @@
 
     <div class="articles-grid">
       <!-- Featured -->
-      <article class="card featured fade-up">
+      <article class="card featured fade-up" data-url="/post/system-programming/rust-ownership/">
         <div class="card-icon">🦀</div>
         <div class="card-content">
           <div style="display:flex; align-items:center; gap:8px;">
@@ -124,7 +126,7 @@
       </article>
 
       <!-- Card 1 -->
-      <article class="card fade-up" style="transition-delay:0.05s">
+      <article class="card fade-up" style="transition-delay:0.05s" data-url="/post/devops/docker-multistage/">
         <div class="card-tags">
           <span class="tag">Docker</span>
           <span class="tag">DevOps</span>
@@ -138,7 +140,7 @@
       </article>
 
       <!-- Card 2 -->
-      <article class="card fade-up" style="transition-delay:0.1s">
+      <article class="card fade-up" style="transition-delay:0.1s" data-url="/post/performance/ebpf-tracing/">
         <div class="card-tags">
           <span class="tag">Linux</span>
           <span class="tag">效能</span>
@@ -152,7 +154,7 @@
       </article>
 
       <!-- Card 3 -->
-      <article class="card fade-up" style="transition-delay:0.15s">
+      <article class="card fade-up" style="transition-delay:0.15s" data-url="/post/concurrency/go-channel-patterns/">
         <div class="card-tags">
           <span class="tag">Go</span>
           <span class="tag">並發</span>
@@ -170,7 +172,7 @@
     <div class="divider-text">更多文章</div>
 
     <div class="article-list">
-      <article class="article-item fade-up">
+      <article class="article-item fade-up" data-url="/post/frontend/wasm-2025/">
         <div class="article-date-block">
           <div class="date-month">Mar</div>
           <div class="date-day">20</div>
@@ -185,7 +187,7 @@
         <span class="article-read">9 min</span>
       </article>
 
-      <article class="article-item fade-up">
+      <article class="article-item fade-up" data-url="/post/database/postgres-explain-analyze/">
         <div class="article-date-block">
           <div class="date-month">Mar</div>
           <div class="date-day">14</div>
@@ -200,7 +202,7 @@
         <span class="article-read">14 min</span>
       </article>
 
-      <article class="article-item fade-up">
+      <article class="article-item fade-up" data-url="/post/tooling/nix-flakes/">
         <div class="article-date-block">
           <div class="date-month">Mar</div>
           <div class="date-day">7</div>
@@ -215,7 +217,7 @@
         <span class="article-read">11 min</span>
       </article>
 
-      <article class="article-item fade-up">
+      <article class="article-item fade-up" data-url="/post/frontend/typescript-advanced-types/">
         <div class="article-date-block">
           <div class="date-month">Feb</div>
           <div class="date-day">22</div>
@@ -230,7 +232,7 @@
         <span class="article-read">7 min</span>
       </article>
 
-      <article class="article-item fade-up">
+      <article class="article-item fade-up" data-url="/post/system-programming/linux-io-model/">
         <div class="article-date-block">
           <div class="date-month">Feb</div>
           <div class="date-day">10</div>
@@ -261,10 +263,10 @@
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <!-- Profile -->
-    <div class="sidebar-block">
+    <div class="sidebar-block" id="about">
       <div class="profile">
         <div class="avatar">KL</div>
-        <div class="profile-name">Kai Lin</div>
+        <div class="profile-name">Awei</div>
         <div class="profile-bio">軟體工程師，熱衷系統程式設計、開源工具與效能優化。<br>在台灣 🇹🇼 敲鍵盤。</div>
         <div class="profile-links">
           <a href="#" class="profile-link">GitHub</a>
@@ -284,34 +286,12 @@
         </div>
         <div class="stat">
           <span class="stat-num">8</span>
-          <div class="stat-label">分類</div>
+          <div class="stat-label">標籤</div>
         </div>
         <div class="stat">
           <span class="stat-num">3</span>
           <div class="stat-label">年</div>
         </div>
-      </div>
-    </div>
-
-    <!-- Tags -->
-    <div class="sidebar-block">
-      <div class="sidebar-title">標籤</div>
-      <div class="tag-cloud">
-        <span class="tag accent">Rust</span>
-        <span class="tag">Linux</span>
-        <span class="tag">Go</span>
-        <span class="tag">Docker</span>
-        <span class="tag">資料庫</span>
-        <span class="tag">演算法</span>
-        <span class="tag">前端</span>
-        <span class="tag">DevOps</span>
-        <span class="tag">TypeScript</span>
-        <span class="tag">效能</span>
-        <span class="tag">WebAssembly</span>
-        <span class="tag">Nix</span>
-        <span class="tag">網路</span>
-        <span class="tag">安全</span>
-        <span class="tag">並發</span>
       </div>
     </div>
 
@@ -364,6 +344,49 @@
     <div class="modal-body" id="modal-body"></div>
   </article>
 </div>
+
+<!-- COMPOSE MODAL -->
+<div class="modal-backdrop" id="compose-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="compose-title" hidden>
+  <article class="article-modal compose-modal">
+    <div class="modal-header">
+      <div class="modal-kicker">New Article</div>
+      <button class="modal-close" id="compose-close" aria-label="關閉撰寫視窗">×</button>
+    </div>
+    <form class="compose-form" id="compose-form">
+      <h2 class="modal-title" id="compose-title">新增文章草稿</h2>
+      <label>
+        <span>標題</span>
+        <input type="text" id="post-title" name="title" placeholder="例如：用 GitHub Pages 維護技術筆記" required>
+      </label>
+      <label>
+        <span>標籤</span>
+        <input type="text" id="post-tags" name="tags" placeholder="用逗號分隔，例如：GitHub Pages, 前端">
+      </label>
+      <label>
+        <span>摘要</span>
+        <textarea id="post-excerpt" name="excerpt" rows="3" placeholder="用一小段話說明這篇文章要解決什麼問題" required></textarea>
+      </label>
+      <label>
+        <span>內文</span>
+        <textarea id="post-content" name="content" rows="8" placeholder="支援一般文字換行，送出後會保存在這台瀏覽器中。" required></textarea>
+      </label>
+      <div class="compose-row">
+        <label>
+          <span>閱讀時間</span>
+          <input type="text" id="post-read" name="read" placeholder="5 分鐘">
+        </label>
+        <label>
+          <span>日期</span>
+          <input type="date" id="post-date" name="date">
+        </label>
+      </div>
+      <div class="compose-actions">
+        <button type="button" class="btn-ghost" id="compose-cancel">取消</button>
+        <button type="submit" class="btn-submit">新增文章</button>
+      </div>
+    </form>
+  </article>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- FOOTER -->
@@ -375,10 +398,9 @@
         ByteLog
       </div>
       <div class="footer-links">
-        <a href="#">RSS</a>
-        <a href="#">隱私</a>
-        <a href="#">聯絡</a>
-        <a href="#">Sitemap</a>
+        <a href="/post/">文章</a>
+        <a href="/about/">關於</a>
+        <a href="#top">Top</a>
       </div>
     </div>
     <div class="footer-copy">© 2025 Kai Lin. 以 Lora × IBM Plex Mono 排版。</div>

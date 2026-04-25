@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Awei's Blog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body id="top">
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="回到首頁">
+      <span class="logo-dot"></span>
+      Awei's Blog
+    </a>
+    <nav>
+      <a href="/post/">文章</a>
+      <a href="/about/" class="active">關於</a>
+    </nav>
+    <div class="header-actions">
+      <div class="theme-pill" onclick="toggleDark()" id="theme-pill" title="切換主題">
+        <div class="pill-track is-dark" id="pill-track">
+          <div class="pill-knob"></div>
+        </div>
+        <span class="pill-label" id="pill-label">深色</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-kicker">About</div>
+  <h1 class="page-title">Awei</h1>
+  <p class="page-lede">這是一個整理工程筆記、系統設計觀察與開發實驗的地方。頁面保持靜態、可版本控制，也保留足夠彈性讓內容逐步長出自己的結構。</p>
+</section>
+
+<div class="main-wrap no-sidebar">
+  <main>
+    <section class="about-panel fade-up">
+      <h2>Kai Lin</h2>
+      <p>軟體工程師，關注系統程式設計、開源工具、效能優化與可維護的工程流程。平常會把踩坑、實驗與讀書筆記整理成可以回頭查的文章。</p>
+      <p>ByteLog 的目標不是追求大量更新，而是讓每篇筆記都有足夠上下文：問題是什麼、我怎麼驗證、最後留下哪些可重複使用的判斷。</p>
+    </section>
+
+    <div class="about-grid">
+      <section class="about-panel fade-up">
+        <h2>寫作方向</h2>
+        <ul class="about-list">
+          <li>Rust、Go、Linux 與底層系統觀念</li>
+          <li>資料庫、觀測性、部署與效能分析</li>
+          <li>可重現開發環境與日常工具鏈</li>
+        </ul>
+      </section>
+
+      <section class="about-panel fade-up">
+        <h2>網站結構</h2>
+        <ul class="about-list">
+          <li><code>/post/</code>：文章列表與草稿入口</li>
+          <li><code>/about/</code>：個人介紹與網站說明</li>
+          <li><code>/css/</code>、<code>/js/</code>：共用風格與互動</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="about-panel fade-up">
+      <h2>聯絡與連結</h2>
+      <p>之後可以把這裡接到真實的 GitHub、LinkedIn 或電子郵件。現在先保留成獨立頁面，方便你未來直接編輯這個目錄下的 HTML。</p>
+      <div class="profile-links">
+        <a href="https://github.com/awei1125" class="profile-link" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="/post/" class="profile-link">文章</a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <a href="/" class="logo" style="font-size:0.9rem;"><span class="logo-dot"></span>ByteLog</a>
+      <div class="footer-links">
+        <a href="/post/">文章</a>
+        <a href="/about/">關於</a>
+        <a href="#top">Top</a>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 Kai Lin. 以 Lora × IBM Plex Mono 排版。</div>
+    <div class="footer-right">Built with <span>♥</span> on GitHub Pages</div>
+  </div>
+</footer>
+
+<script src="../js/app.js" defer></script>
+</body>
+</html>

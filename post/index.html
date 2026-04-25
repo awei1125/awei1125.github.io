@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章 — ByteLog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body id="top">
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo" aria-label="回到首頁"><span class="logo-dot"></span>ByteLog</a>
+    <nav><a href="/post/" class="active">文章</a><a href="/about/">關於</a></nav>
+    <div class="header-actions">
+      <div class="search-wrap" style="display:none;" id="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" placeholder="搜尋文章…" id="search-input">
+      </div>
+      <button class="btn-theme" onclick="toggleSearch()" title="搜尋"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+      <button class="btn-write" id="compose-open" type="button" hidden><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>撰寫</button>
+      <div class="theme-pill" onclick="toggleDark()" id="theme-pill" title="切換主題"><div class="pill-track is-dark" id="pill-track"><div class="pill-knob"></div></div><span class="pill-label" id="pill-label">深色</span></div>
+      <button class="btn-rss" type="button">RSS</button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-kicker">Posts</div>
+  <h1 class="page-title">文章</h1>
+  <p class="page-lede">文章已依主題放進對應目錄；每篇文章也會出現在它標註到的標籤頁。</p>
+  <div class="archive-cloud" data-topic-cloud></div>
+</section>
+
+<div class="main-wrap no-sidebar">
+  <main id="articles" tabindex="-1">
+    <div class="section-header">
+      <span class="section-title">全部文章</span>
+      <span class="section-count">共 0 篇</span>
+    </div>
+    <div data-post-list></div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="compose-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="compose-title" hidden>
+  <article class="article-modal compose-modal">
+    <div class="modal-header"><div class="modal-kicker">New Article</div><button class="modal-close" id="compose-close" aria-label="關閉撰寫視窗">×</button></div>
+    <form class="compose-form" id="compose-form">
+      <h2 class="modal-title" id="compose-title">新增文章草稿</h2>
+      <label><span>標題</span><input type="text" id="post-title" name="title" placeholder="例如：用 GitHub Pages 維護技術筆記" required></label>
+      <label><span>標籤</span><input type="text" id="post-tags" name="tags" placeholder="用逗號分隔，例如：GitHub Pages, 前端"></label>
+      <label><span>摘要</span><textarea id="post-excerpt" name="excerpt" rows="3" placeholder="用一小段話說明這篇文章要解決什麼問題" required></textarea></label>
+      <label><span>內文</span><textarea id="post-content" name="content" rows="8" placeholder="支援一般文字換行，送出後會保存在這台瀏覽器中。" required></textarea></label>
+      <div class="compose-row"><label><span>閱讀時間</span><input type="text" id="post-read" name="read" placeholder="5 分鐘"></label><label><span>日期</span><input type="date" id="post-date" name="date"></label></div>
+      <div class="compose-actions"><button type="button" class="btn-ghost" id="compose-cancel">取消</button><button type="submit" class="btn-submit">新增文章</button></div>
+    </form>
+  </article>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left"><a href="/" class="logo" style="font-size:0.9rem;"><span class="logo-dot"></span>ByteLog</a><div class="footer-links"><a href="/post/">文章</a><a href="/about/">關於</a><a href="#top">Top</a></div></div>
+    <div class="footer-copy">© 2025 Kai Lin. 以 Lora × IBM Plex Mono 排版。</div>
+    <div class="footer-right">Built with <span>♥</span> on GitHub Pages</div>
+  </div>
+</footer>
+
+<script src="../js/posts-data.js" defer></script>
+<script src="../js/archive.js" defer></script>
+<script src="../js/app.js" defer></script>
+</body>
+</html>
