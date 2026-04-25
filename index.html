@@ -1,267 +1,1230 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-
-<!-- Head tag -->
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ByteLog — 技術筆記</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ── 深色模式（預設）── */
+    --bg:         #1E1B17;
+    --bg-card:    #262219;
+    --bg-dark:    #2E2A23;
+    --text:       #EDE8DE;
+    --text-muted: #9E9486;
+    --text-faint: #5C5650;
+    --accent:     #D97A52;
+    --accent-lt:  #3D2518;
+    --accent-dk:  #F0A07A;
+    --border:     #3A3530;
+    --tag-bg:     #2E2A23;
+    --code-bg:    #151310;
+    --code-text:  #E8D5C0;
+    --serif:      'Lora', Georgia, serif;
+    --sans:       'DM Sans', sans-serif;
+    --mono:       'IBM Plex Mono', monospace;
+    --radius:     6px;
+    --radius-lg:  12px;
+    /* toggle pill */
+    --pill-bg:        #2E2A23;
+    --pill-border:    #3A3530;
+    --pill-knob:      #D97A52;
+    --pill-icon-off:  #5C5650;
+    --pill-icon-on:   #EDE8DE;
+  }
+  [data-theme="light"] {
+    /* ── 白天模式（米色）── */
+    --bg:         #F5F0E8;
+    --bg-card:    #FDFAF5;
+    --bg-dark:    #EDE6D8;
+    --text:       #28231C;
+    --text-muted: #7A7060;
+    --text-faint: #B0A590;
+    --accent:     #C96A42;
+    --accent-lt:  #F2DDD0;
+    --accent-dk:  #9A4E2E;
+    --border:     #DDD5C4;
+    --tag-bg:     #EAE4D8;
+    --code-bg:    #2A2520;
+    --code-text:  #E8D5C0;
+    /* toggle pill */
+    --pill-bg:        #EDE6D8;
+    --pill-border:    #DDD5C4;
+    --pill-knob:      #C96A42;
+    --pill-icon-off:  #B0A590;
+    --pill-icon-on:   #28231C;
+  }
 
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <!--Description-->
+  html { scroll-behavior: smooth; }
 
-    
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
 
-    
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--accent); }
 
-    <!--Author-->
-    
-        <meta name="author" content="John Doe"/>
-    
+  img { max-width: 100%; display: block; }
 
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="Awei Blog"/>
-    
+  /* ── HEADER ── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .header-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .logo {
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  nav a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: var(--radius);
+    transition: color 0.2s, background 0.2s;
+  }
+  nav a:hover { color: var(--text); background: var(--bg-dark); }
+  nav a.active { color: var(--accent); font-weight: 500; }
 
-    <!--Open Graph Description-->
-    
+  .header-actions { display: flex; align-items: center; gap: 8px; }
 
-    <!--Open Graph Site Name-->
-        <meta property="og:site_name" content="Awei Blog"/>
+  /* ── THEME PILL TOGGLE ── */
+  .theme-pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    border-radius: 100px;
+    padding: 4px 10px 4px 8px;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    user-select: none;
+  }
+  .theme-pill:hover { border-color: var(--accent); }
 
-    <!--Type page-->
-    
-        <meta property="og:type" content="website"/>
-    
+  .pill-track {
+    position: relative;
+    width: 34px;
+    height: 18px;
+    background: var(--pill-border);
+    border-radius: 100px;
+    transition: background 0.35s;
+    flex-shrink: 0;
+  }
+  .pill-track.is-dark { background: var(--accent); }
 
-    <!--Page Cover-->
-    
-    
-        <meta property="og:image" content="https://awei1125.github.ioimg/home-bg.jpg"/>
-    
+  .pill-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .pill-track.is-dark .pill-knob { transform: translateX(16px); }
 
-        <meta name="twitter:card" content="summary_large_image"/>
+  .pill-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    transition: color 0.3s;
+    min-width: 32px;
+  }
 
-    
+  .btn-theme {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 34px; height: 34px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-theme:hover { border-color: var(--accent); background: var(--accent-lt); }
 
-    
-        <meta name="twitter:image" content="https://awei1125.github.ioimg/home-bg.jpg"/>
-    
+  .btn-rss {
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-rss:hover { background: var(--accent-dk); }
 
-    <!-- Title -->
-    
-    <title>Awei Blog</title>
+  /* ── HERO ── */
+  .hero {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
 
-    <!-- Bootstrap Core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+  .hero-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--accent-lt);
+    max-width: 60px;
+  }
 
-    <!-- Custom CSS -->
-    
-<link rel="stylesheet" href="/css/style.css">
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
 
+  .hero-excerpt {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+    max-width: 560px;
+  }
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  .hero-meta time {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-faint);
+  }
 
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet"/>
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--tag-bg);
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .tag:hover { background: var(--accent-lt); color: var(--accent); border-color: var(--accent-lt); }
+  .tag.accent { background: var(--accent-lt); color: var(--accent); }
 
-    <!-- Google Analytics -->
-    
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: gap 0.2s;
+  }
+  .read-more:hover { gap: 10px; color: var(--accent); }
+  .read-more svg { transition: transform 0.2s; }
+  .read-more:hover svg { transform: translateX(2px); }
 
+  /* Hero visual */
+  .hero-visual {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-code-header {
+    background: var(--bg-dark);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #E57373; }
+  .dot-y { background: #FFB74D; }
+  .dot-g { background: #81C784; }
+  .hero-code-title {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    margin-left: 6px;
+  }
+  .hero-code-body {
+    padding: 1.25rem 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    line-height: 1.8;
+    background: var(--code-bg);
+    color: var(--code-text);
+    min-height: 220px;
+    overflow: hidden;
+  }
+  .c-kw { color: #C792EA; }
+  .c-fn { color: #82AAFF; }
+  .c-str { color: #C3E88D; }
+  .c-cm { color: #546E7A; font-style: italic; }
+  .c-num { color: #F78C6C; }
+  .c-type { color: #FFCB6B; }
 
-    <!-- favicon -->
-    
+  /* ── MAIN LAYOUT ── */
+  .main-wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 3rem;
+    align-items: start;
+  }
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .section-count {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-faint);
+  }
 
+  /* ── ARTICLE CARDS ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
 
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--text);
+    transition: color 0.2s;
+  }
+  .card:hover .card-title { color: var(--accent); }
+
+  .card-excerpt {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--border);
+  }
+  .card-time {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+  .card-read {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+
+  /* Featured card (full width) */
+  .card.featured {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  .card.featured .card-content { flex: 1; display: flex; flex-direction: column; gap: 0.875rem; }
+  .card.featured .card-title { font-size: 1.35rem; }
+  .card-badge {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--accent);
+    color: white;
+  }
+  .card-icon {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    border-radius: var(--radius);
+    background: var(--accent-lt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 2rem; }
+
+  .sidebar-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+  }
+
+  .sidebar-title {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .recent-list { display: flex; flex-direction: column; gap: 0; }
+  .recent-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .recent-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .recent-item:hover .recent-title { color: var(--accent); }
+  .recent-num {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--accent-lt);
+    min-width: 22px;
+    color: var(--accent);
+    opacity: 0.4;
+  }
+  .recent-info { flex: 1; }
+  .recent-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 3px;
+    transition: color 0.2s;
+  }
+  .recent-date {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-faint);
+  }
+
+  /* Profile block */
+  .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  .avatar {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-lt), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: white;
+  }
+  .profile-name {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .profile-bio {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .profile-links {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .profile-link {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .profile-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .stat {
+    background: var(--bg-dark);
+    border-radius: var(--radius);
+    padding: 10px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    margin-top: 2px;
+  }
+
+  /* ── ARTICLE LIST ── */
+  .article-list { display: flex; flex-direction: column; gap: 0; }
+  .article-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .article-item:last-child { border-bottom: none; }
+  .article-item:hover .article-title { color: var(--accent); }
+  .article-date-block {
+    background: var(--bg-dark);
+    border-radius: var(--radius);
+    padding: 6px;
+    text-align: center;
+    min-width: 56px;
+  }
+  .date-month {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+  }
+  .date-day {
+    font-family: var(--mono);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .article-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text);
+    transition: color 0.2s;
+    line-height: 1.4;
+  }
+  .article-tags { display: flex; gap: 5px; margin-top: 5px; }
+  .article-read {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    white-space: nowrap;
+  }
+
+  /* ── PAGINATION ── */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 2rem 0 1rem;
+  }
+  .page-btn {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    width: 34px; height: 34px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .page-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .page-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-faint);
+  }
+  .footer-links {
+    display: flex;
+    gap: 1rem;
+  }
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-right {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .footer-right span { color: var(--accent); }
+
+  /* ── SEARCH BAR ── */
+  .search-wrap {
+    position: relative;
+    max-width: 320px;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 7px 12px 7px 34px;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input::placeholder { color: var(--text-faint); }
+  .search-input:focus { border-color: var(--accent); }
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-faint);
+    pointer-events: none;
+  }
+
+  /* ── UTILS ── */
+  .divider-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 1.75rem;
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .divider-text::before, .divider-text::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .main-wrap { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .card.featured { flex-direction: column; }
+  }
+  @media (max-width: 600px) {
+    .header-inner { padding: 0 1rem; }
+    nav { display: none; }
+    .main-wrap { padding: 2rem 1rem; }
+    .hero { padding: 2rem 1rem; }
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-left { flex-direction: column; gap: 0.5rem; }
+  }
+
+  /* Scroll animation */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
 <body>
 
-    <!-- Menu -->
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Awei Blog</a>
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-dot"></span>
+      ByteLog
+    </a>
+    <nav>
+      <a href="#" class="active">文章</a>
+      <a href="#">分類</a>
+      <a href="#">專案</a>
+      <a href="#">關於</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-wrap" style="display:none;" id="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" placeholder="搜尋文章…" id="search-input">
+      </div>
+      <button class="btn-theme" onclick="toggleSearch()" title="搜尋">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <div class="theme-pill" onclick="toggleDark()" id="theme-pill" title="切換主題">
+        <div class="pill-track is-dark" id="pill-track">
+          <div class="pill-knob"></div>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                
-                    <li>
-                        <a href="/">
-                            
-                                首頁
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/archives">
-                            
-                                文章
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/tags">
-                            
-                                Tags
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/categories">
-                            
-                                Categories
-                            
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/about">
-                            
-                                關於
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a target="_blank" rel="noopener" href="https://github.com/klugjo/hexo-theme-clean-blog">
-                            
-                                <i class="fa fa-github fa-stack-2x"></i>
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+        <span class="pill-label" id="pill-label">深色</span>
+      </div>
+      <button class="btn-rss">RSS</button>
     </div>
-    <!-- /.container -->
-</nav>
-
-    <!-- Main Content -->
-    <!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
-<header class="intro-header" style="color: #dd9742;">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>史詩企劃</h1>
-                    <h2>Operating Systems: Three Easy Pieces中譯計劃</h2>
-                    <hr class="small">
-                    <!--span class="subheading"></span-->
-                    <a href="/OS">點我看更多</a>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-preview">
-                <a href="/OS"><h2 class="post-title">OS</h2></a>
-                    <p class="post-meta">
-                    <!-- Date and Author -->  
-                    2025-03-01
-                    </p>
-            </div>
-        <hr>
-            <div class="post-preview">
-                <a href="/2025/02/28/hello-world/"><h2 class="post-title">測試文</h2></a>
-                    <p class="post-meta">
-                    <!-- Date and Author -->  
-                    2025-02-28
-                    </p>
-            </div>
-        <hr>
-        <ul class="pager"></ul>
-        </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left fade-up">
+    <div class="hero-label">精選文章</div>
+    <h1 class="hero-title">深入理解<br>Rust 所有權機制<br>與記憶體安全</h1>
+    <p class="hero-excerpt">
+      Rust 最令人印象深刻的特性之一，就是在不需要垃圾回收的情況下保證記憶體安全。本文帶你從 borrow checker 的核心邏輯出發，理解 lifetime 標注的真正意義。
+    </p>
+    <div class="hero-meta">
+      <a href="#" class="read-more">
+        閱讀全文
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <time>2025 年 4 月 18 日</time>
+      <span class="tag accent">Rust</span>
+      <span class="tag">系統程式</span>
     </div>
+  </div>
+
+  <div class="hero-visual fade-up" style="transition-delay:0.15s">
+    <div class="hero-code-header">
+      <span class="dot dot-r"></span>
+      <span class="dot dot-y"></span>
+      <span class="dot dot-g"></span>
+      <span class="hero-code-title">ownership.rs</span>
+    </div>
+    <div class="hero-code-body">
+<span class="c-cm">// 所有權轉移示範</span>
+<span class="c-kw">fn</span> <span class="c-fn">takes_ownership</span>(s: <span class="c-type">String</span>) {
+    println!(<span class="c-str">"Got: {}"</span>, s);
+} <span class="c-cm">// s 在此被 drop</span>
+
+<span class="c-kw">fn</span> <span class="c-fn">makes_copy</span>(n: <span class="c-type">i32</span>) {
+    println!(<span class="c-str">"Got: {}"</span>, n);
+} <span class="c-cm">// Copy trait，不影響原值</span>
+
+<span class="c-kw">fn</span> <span class="c-fn">main</span>() {
+    <span class="c-kw">let</span> s = <span class="c-type">String</span>::from(<span class="c-str">"hello"</span>);
+    takes_ownership(s);
+    <span class="c-cm">// println!("{}", s); ← 編譯錯誤！</span>
+
+    <span class="c-kw">let</span> n = <span class="c-num">42</span>;
+    makes_copy(n);
+    println!(<span class="c-str">"n is still {}"</span>, n); <span class="c-cm">// ✓ ok</span>
+}
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div class="main-wrap">
+  <main>
+    <!-- Featured + Grid -->
+    <div class="section-header">
+      <span class="section-title">最新文章</span>
+      <span class="section-count">共 42 篇</span>
+    </div>
+
+    <div class="articles-grid">
+      <!-- Featured -->
+      <article class="card featured fade-up">
+        <div class="card-icon">🦀</div>
+        <div class="card-content">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span class="card-badge">精選</span>
+            <div class="card-tags">
+              <span class="tag accent">Rust</span>
+              <span class="tag">系統程式</span>
+            </div>
+          </div>
+          <h2 class="card-title">深入理解 Rust 所有權機制與記憶體安全</h2>
+          <p class="card-excerpt">從 borrow checker 的核心邏輯出發，理解 lifetime 標注背後的設計哲學，並透過實際案例探討如何在不犧牲效能的前提下達到安全性。</p>
+          <div class="card-footer">
+            <time class="card-time">2025 年 4 月 18 日</time>
+            <span class="card-read">閱讀時間 12 分鐘</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 1 -->
+      <article class="card fade-up" style="transition-delay:0.05s">
+        <div class="card-tags">
+          <span class="tag">Docker</span>
+          <span class="tag">DevOps</span>
+        </div>
+        <h2 class="card-title">用 multi-stage build 大幅縮小 Docker image 體積</h2>
+        <p class="card-excerpt">多階段建構不只能降低 image 大小，還能讓 build 邏輯更清晰。本篇介紹最佳實踐與常見陷阱。</p>
+        <div class="card-footer">
+          <time class="card-time">4 月 12 日</time>
+          <span class="card-read">8 分鐘</span>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card fade-up" style="transition-delay:0.1s">
+        <div class="card-tags">
+          <span class="tag">Linux</span>
+          <span class="tag">效能</span>
+        </div>
+        <h2 class="card-title">eBPF：在不修改 kernel 的情況下追蹤系統行為</h2>
+        <p class="card-excerpt">eBPF 讓你能在生產環境中進行高效能的觀測與除錯，而無需修改核心原始碼或重啟服務。</p>
+        <div class="card-footer">
+          <time class="card-time">4 月 5 日</time>
+          <span class="card-read">15 分鐘</span>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card fade-up" style="transition-delay:0.15s">
+        <div class="card-tags">
+          <span class="tag">Go</span>
+          <span class="tag">並發</span>
+        </div>
+        <h2 class="card-title">Go channel 設計模式：從 fan-out 到 pipeline</h2>
+        <p class="card-excerpt">Channel 不只是傳遞資料的管道，它是 Go 並發模型的核心抽象。透過幾個實際模式掌握其用法。</p>
+        <div class="card-footer">
+          <time class="card-time">3 月 28 日</time>
+          <span class="card-read">10 分鐘</span>
+        </div>
+      </article>
+    </div>
+
+    <!-- Article List -->
+    <div class="divider-text">更多文章</div>
+
+    <div class="article-list">
+      <article class="article-item fade-up">
+        <div class="article-date-block">
+          <div class="date-month">Mar</div>
+          <div class="date-day">20</div>
+        </div>
+        <div>
+          <h3 class="article-title">WebAssembly 在 2025 年的現狀：從瀏覽器到邊緣運算</h3>
+          <div class="article-tags">
+            <span class="tag">WebAssembly</span>
+            <span class="tag">前端</span>
+          </div>
+        </div>
+        <span class="article-read">9 min</span>
+      </article>
+
+      <article class="article-item fade-up">
+        <div class="article-date-block">
+          <div class="date-month">Mar</div>
+          <div class="date-day">14</div>
+        </div>
+        <div>
+          <h3 class="article-title">PostgreSQL EXPLAIN ANALYZE 完全指南：讀懂查詢計畫</h3>
+          <div class="article-tags">
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">資料庫</span>
+          </div>
+        </div>
+        <span class="article-read">14 min</span>
+      </article>
+
+      <article class="article-item fade-up">
+        <div class="article-date-block">
+          <div class="date-month">Mar</div>
+          <div class="date-day">7</div>
+        </div>
+        <div>
+          <h3 class="article-title">用 Nix Flakes 打造可重現的開發環境</h3>
+          <div class="article-tags">
+            <span class="tag">Nix</span>
+            <span class="tag">工具鏈</span>
+          </div>
+        </div>
+        <span class="article-read">11 min</span>
+      </article>
+
+      <article class="article-item fade-up">
+        <div class="article-date-block">
+          <div class="date-month">Feb</div>
+          <div class="date-day">22</div>
+        </div>
+        <div>
+          <h3 class="article-title">TypeScript 5.x 實用進階型別技巧整理</h3>
+          <div class="article-tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">前端</span>
+          </div>
+        </div>
+        <span class="article-read">7 min</span>
+      </article>
+
+      <article class="article-item fade-up">
+        <div class="article-date-block">
+          <div class="date-month">Feb</div>
+          <div class="date-day">10</div>
+        </div>
+        <div>
+          <h3 class="article-title">深度解析 Linux I/O 模型：從阻塞到 io_uring</h3>
+          <div class="article-tags">
+            <span class="tag">Linux</span>
+            <span class="tag">系統程式</span>
+          </div>
+        </div>
+        <span class="article-read">18 min</span>
+      </article>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <button class="page-btn">‹</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <button class="page-btn" style="width:auto; padding: 0 10px;">…</button>
+      <button class="page-btn">8</button>
+      <button class="page-btn">›</button>
+    </div>
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <!-- Profile -->
+    <div class="sidebar-block">
+      <div class="profile">
+        <div class="avatar">KL</div>
+        <div class="profile-name">Kai Lin</div>
+        <div class="profile-bio">軟體工程師，熱衷系統程式設計、開源工具與效能優化。<br>在台灣 🇹🇼 敲鍵盤。</div>
+        <div class="profile-links">
+          <a href="#" class="profile-link">GitHub</a>
+          <a href="#" class="profile-link">Twitter</a>
+          <a href="#" class="profile-link">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">部落格統計</div>
+      <div class="stats-grid">
+        <div class="stat">
+          <span class="stat-num">42</span>
+          <div class="stat-label">文章</div>
+        </div>
+        <div class="stat">
+          <span class="stat-num">8</span>
+          <div class="stat-label">分類</div>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3</span>
+          <div class="stat-label">年</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">標籤</div>
+      <div class="tag-cloud">
+        <span class="tag accent">Rust</span>
+        <span class="tag">Linux</span>
+        <span class="tag">Go</span>
+        <span class="tag">Docker</span>
+        <span class="tag">資料庫</span>
+        <span class="tag">演算法</span>
+        <span class="tag">前端</span>
+        <span class="tag">DevOps</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">效能</span>
+        <span class="tag">WebAssembly</span>
+        <span class="tag">Nix</span>
+        <span class="tag">網路</span>
+        <span class="tag">安全</span>
+        <span class="tag">並發</span>
+      </div>
+    </div>
+
+    <!-- Recent -->
+    <div class="sidebar-block">
+      <div class="sidebar-title">近期熱門</div>
+      <div class="recent-list">
+        <div class="recent-item">
+          <span class="recent-num">01</span>
+          <div class="recent-info">
+            <div class="recent-title">Rust 所有權機制完整解說</div>
+            <div class="recent-date">4 月 18 日 · 12 min</div>
+          </div>
+        </div>
+        <div class="recent-item">
+          <span class="recent-num">02</span>
+          <div class="recent-info">
+            <div class="recent-title">Linux I/O 模型：從阻塞到 io_uring</div>
+            <div class="recent-date">2 月 10 日 · 18 min</div>
+          </div>
+        </div>
+        <div class="recent-item">
+          <span class="recent-num">03</span>
+          <div class="recent-info">
+            <div class="recent-title">PostgreSQL EXPLAIN ANALYZE 指南</div>
+            <div class="recent-date">3 月 14 日 · 14 min</div>
+          </div>
+        </div>
+        <div class="recent-item">
+          <span class="recent-num">04</span>
+          <div class="recent-info">
+            <div class="recent-title">Go channel 並發設計模式</div>
+            <div class="recent-date">3 月 28 日 · 10 min</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
 </div>
 
-
-
-    <!-- Footer -->
-    <hr />
-
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    
-
-                    
-
-                    
-                        <li>
-                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    
-
-                    
-
-                    
-
-                    
-                </ul>
-                <p class="copyright text-muted">&copy; 2025 Awei<br></p>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
-            </div>
-        </div>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="logo" style="font-size:0.9rem;">
+        <span class="logo-dot"></span>
+        ByteLog
+      </div>
+      <div class="footer-links">
+        <a href="#">RSS</a>
+        <a href="#">隱私</a>
+        <a href="#">聯絡</a>
+        <a href="#">Sitemap</a>
+      </div>
     </div>
+    <div class="footer-copy">© 2025 Kai Lin. 以 Lora × IBM Plex Mono 排版。</div>
+    <div class="footer-right">
+      Built with <span>♥</span> on GitHub Pages
+    </div>
+  </div>
 </footer>
 
+<script>
+  // Theme toggle — dark by default
+  const html = document.documentElement;
+  const track = document.getElementById('pill-track');
+  const label = document.getElementById('pill-label');
 
-    <!-- After footer scripts -->
-    
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+  let dark = localStorage.getItem('theme') !== 'light';
 
-<!-- Bootstrap -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  function applyTheme() {
+    if (dark) {
+      html.removeAttribute('data-theme');
+      track.classList.add('is-dark');
+      label.textContent = '深色';
+    } else {
+      html.setAttribute('data-theme', 'light');
+      track.classList.remove('is-dark');
+      label.textContent = '白天';
+    }
+  }
+  function toggleDark() {
+    dark = !dark;
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+    applyTheme();
+  }
+  applyTheme();
 
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+  // Search toggle
+  function toggleSearch() {
+    const wrap = document.getElementById('search-wrap');
+    const visible = wrap.style.display !== 'none';
+    wrap.style.display = visible ? 'none' : 'block';
+    if (!visible) document.getElementById('search-input').focus();
+  }
 
-<!-- Disqus Comments -->
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
 
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  // Pagination interaction
+  document.querySelectorAll('.page-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+      if (!['‹', '›', '…'].includes(this.textContent)) {
+        this.classList.add('active');
+      }
+    });
+  });
 
+  // Tag filter (visual only)
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('click', function() {
+      document.querySelectorAll('.tag').forEach(t => t.classList.remove('accent'));
+      this.classList.add('accent');
+    });
+  });
+</script>
 </body>
-
 </html>
