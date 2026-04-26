@@ -40,13 +40,14 @@
   })[ch]);
 
   const main = document.querySelector('main');
+  const isDetailPage = !!document.querySelector('[data-post-detail]');
   const divider = document.querySelector('.divider-text');
   const isPostRoot = window.location.pathname === '/post/' || window.location.pathname === '/post/index.html';
   const noResults = document.createElement('div');
   noResults.className = 'no-results';
   noResults.textContent = '找不到符合條件的文章。試著換個關鍵字或點其他標籤。';
-  if (divider?.parentNode) divider.parentNode.insertBefore(noResults, divider);
-  else if (main) main.appendChild(noResults);
+  if (!isDetailPage && divider?.parentNode) divider.parentNode.insertBefore(noResults, divider);
+  else if (!isDetailPage && main) main.appendChild(noResults);
 
   function syncAuthorModeFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -281,6 +282,7 @@
   }
 
   function renderPosts() {
+    if (isDetailPage) return;
     const filtered = getFilteredPosts();
     const query = clean(searchInput?.value || '');
     const start = (currentPage - 1) * pageSize;
@@ -451,21 +453,6 @@
     });
   }
 
-  function bindRSS() {
-    document.querySelector('.btn-rss')?.addEventListener('click', () => {
-      const items = posts.map(post => `<item><title>${escapeHTML(post.title)}</title><description>${escapeHTML(post.excerpt)}</description><category>${escapeHTML(post.tags.join(', '))}</category></item>`).join('');
-      const rss = `<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"><channel><title>ByteLog</title><description>技術筆記 RSS demo</description>${items}</channel></rss>`;
-      const blob = new Blob([rss], { type: 'application/rss+xml;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'bytelog-rss.xml';
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('已產生 RSS XML 檔');
-    });
-  }
-
   function bindSearch() {
     if (!searchInput) return;
     searchInput.addEventListener('input', () => {
@@ -586,7 +573,6 @@
     bindPosts();
     bindTags();
     bindNav();
-    bindRSS();
     bindSearch();
     bindModals();
     bindComposeForm();

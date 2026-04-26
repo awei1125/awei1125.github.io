@@ -29,6 +29,7 @@ window.BYTELOG_POSTS = [
     ],
     date: '4 月 12 日',
     read: '8 分鐘',
+    icon: '🐳',
     url: '/post/devops/docker-multistage/',
     excerpt: '多階段建構不只能降低 image 大小，還能讓 build 邏輯更清晰。本篇介紹最佳實踐與常見陷阱。',
     paragraphs: [
@@ -47,6 +48,7 @@ window.BYTELOG_POSTS = [
     ],
     date: '4 月 5 日',
     read: '15 分鐘',
+    icon: '📡',
     url: '/post/performance/ebpf-tracing/',
     excerpt: 'eBPF 讓你能在生產環境中進行高效能的觀測與除錯，而無需修改核心原始碼或重啟服務。',
     paragraphs: [
@@ -65,6 +67,7 @@ window.BYTELOG_POSTS = [
     ],
     date: '3 月 28 日',
     read: '10 分鐘',
+    icon: '〽️',
     url: '/post/concurrency/go-channel-patterns/',
     excerpt: 'Channel 不只是傳遞資料的管道，它是 Go 並發模型的核心抽象。透過幾個實際模式掌握其用法。',
     paragraphs: [
@@ -83,6 +86,7 @@ window.BYTELOG_POSTS = [
     ],
     date: 'Mar 20',
     read: '9 min',
+    icon: '🧩',
     url: '/post/frontend/wasm-2025/',
     excerpt: '整理 WebAssembly 在瀏覽器、伺服器與邊緣運算中的角色變化，以及它適合解決的問題類型。',
     paragraphs: [
@@ -101,6 +105,7 @@ window.BYTELOG_POSTS = [
     ],
     date: 'Mar 14',
     read: '14 min',
+    icon: '🐘',
     url: '/post/database/postgres-explain-analyze/',
     excerpt: '查詢計畫不是資料庫黑盒輸出的神諭，而是理解索引、join strategy 與資料分布的觀測工具。',
     paragraphs: [
@@ -119,6 +124,7 @@ window.BYTELOG_POSTS = [
     ],
     date: 'Mar 7',
     read: '11 min',
+    icon: '❄️',
     url: '/post/tooling/nix-flakes/',
     excerpt: '用 Nix Flakes 固定工具版本與開發環境，降低新人 setup 成本，也讓 CI 與本機更接近。',
     paragraphs: [
@@ -137,6 +143,7 @@ window.BYTELOG_POSTS = [
     ],
     date: 'Feb 22',
     read: '7 min',
+    icon: '🔷',
     url: '/post/frontend/typescript-advanced-types/',
     excerpt: '整理條件型別、映射型別與 satisfies 的常見用法，讓型別系統幫你守住資料形狀。',
     paragraphs: [
@@ -155,6 +162,7 @@ window.BYTELOG_POSTS = [
     ],
     date: 'Feb 10',
     read: '18 min',
+    icon: '🐧',
     url: '/post/system-programming/linux-io-model/',
     excerpt: '從 blocking I/O、non-blocking I/O、epoll 到 io_uring，理解 Linux I/O 模型的演進脈絡。',
     paragraphs: [

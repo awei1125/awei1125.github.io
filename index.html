@@ -41,7 +41,6 @@
         </div>
         <span class="pill-label" id="pill-label">深色</span>
       </div>
-      <button class="btn-rss" type="button">RSS</button>
     </div>
   </div>
 </header>
@@ -98,155 +97,11 @@
 <!-- MAIN -->
 <div class="main-wrap">
   <main id="articles" tabindex="-1">
-    <!-- Featured + Grid -->
     <div class="section-header">
       <span class="section-title">最新文章</span>
-      <span class="section-count">共 42 篇</span>
+      <span class="section-count">共 0 篇</span>
     </div>
-
-    <div class="articles-grid">
-      <!-- Featured -->
-      <article class="card featured fade-up" data-url="/post/system-programming/rust-ownership/">
-        <div class="card-icon">🦀</div>
-        <div class="card-content">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <span class="card-badge">精選</span>
-            <div class="card-tags">
-              <span class="tag accent">Rust</span>
-              <span class="tag">系統程式</span>
-            </div>
-          </div>
-          <h2 class="card-title">深入理解 Rust 所有權機制與記憶體安全</h2>
-          <p class="card-excerpt">從 borrow checker 的核心邏輯出發，理解 lifetime 標注背後的設計哲學，並透過實際案例探討如何在不犧牲效能的前提下達到安全性。</p>
-          <div class="card-footer">
-            <time class="card-time">2025 年 4 月 18 日</time>
-            <span class="card-read">閱讀時間 12 分鐘</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- Card 1 -->
-      <article class="card fade-up" style="transition-delay:0.05s" data-url="/post/devops/docker-multistage/">
-        <div class="card-tags">
-          <span class="tag">Docker</span>
-          <span class="tag">DevOps</span>
-        </div>
-        <h2 class="card-title">用 multi-stage build 大幅縮小 Docker image 體積</h2>
-        <p class="card-excerpt">多階段建構不只能降低 image 大小，還能讓 build 邏輯更清晰。本篇介紹最佳實踐與常見陷阱。</p>
-        <div class="card-footer">
-          <time class="card-time">4 月 12 日</time>
-          <span class="card-read">8 分鐘</span>
-        </div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="card fade-up" style="transition-delay:0.1s" data-url="/post/performance/ebpf-tracing/">
-        <div class="card-tags">
-          <span class="tag">Linux</span>
-          <span class="tag">效能</span>
-        </div>
-        <h2 class="card-title">eBPF：在不修改 kernel 的情況下追蹤系統行為</h2>
-        <p class="card-excerpt">eBPF 讓你能在生產環境中進行高效能的觀測與除錯，而無需修改核心原始碼或重啟服務。</p>
-        <div class="card-footer">
-          <time class="card-time">4 月 5 日</time>
-          <span class="card-read">15 分鐘</span>
-        </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="card fade-up" style="transition-delay:0.15s" data-url="/post/concurrency/go-channel-patterns/">
-        <div class="card-tags">
-          <span class="tag">Go</span>
-          <span class="tag">並發</span>
-        </div>
-        <h2 class="card-title">Go channel 設計模式：從 fan-out 到 pipeline</h2>
-        <p class="card-excerpt">Channel 不只是傳遞資料的管道，它是 Go 並發模型的核心抽象。透過幾個實際模式掌握其用法。</p>
-        <div class="card-footer">
-          <time class="card-time">3 月 28 日</time>
-          <span class="card-read">10 分鐘</span>
-        </div>
-      </article>
-    </div>
-
-    <!-- Article List -->
-    <div class="divider-text">更多文章</div>
-
-    <div class="article-list">
-      <article class="article-item fade-up" data-url="/post/frontend/wasm-2025/">
-        <div class="article-date-block">
-          <div class="date-month">Mar</div>
-          <div class="date-day">20</div>
-        </div>
-        <div>
-          <h3 class="article-title">WebAssembly 在 2025 年的現狀：從瀏覽器到邊緣運算</h3>
-          <div class="article-tags">
-            <span class="tag">WebAssembly</span>
-            <span class="tag">前端</span>
-          </div>
-        </div>
-        <span class="article-read">9 min</span>
-      </article>
-
-      <article class="article-item fade-up" data-url="/post/database/postgres-explain-analyze/">
-        <div class="article-date-block">
-          <div class="date-month">Mar</div>
-          <div class="date-day">14</div>
-        </div>
-        <div>
-          <h3 class="article-title">PostgreSQL EXPLAIN ANALYZE 完全指南：讀懂查詢計畫</h3>
-          <div class="article-tags">
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">資料庫</span>
-          </div>
-        </div>
-        <span class="article-read">14 min</span>
-      </article>
-
-      <article class="article-item fade-up" data-url="/post/tooling/nix-flakes/">
-        <div class="article-date-block">
-          <div class="date-month">Mar</div>
-          <div class="date-day">7</div>
-        </div>
-        <div>
-          <h3 class="article-title">用 Nix Flakes 打造可重現的開發環境</h3>
-          <div class="article-tags">
-            <span class="tag">Nix</span>
-            <span class="tag">工具鏈</span>
-          </div>
-        </div>
-        <span class="article-read">11 min</span>
-      </article>
-
-      <article class="article-item fade-up" data-url="/post/frontend/typescript-advanced-types/">
-        <div class="article-date-block">
-          <div class="date-month">Feb</div>
-          <div class="date-day">22</div>
-        </div>
-        <div>
-          <h3 class="article-title">TypeScript 5.x 實用進階型別技巧整理</h3>
-          <div class="article-tags">
-            <span class="tag">TypeScript</span>
-            <span class="tag">前端</span>
-          </div>
-        </div>
-        <span class="article-read">7 min</span>
-      </article>
-
-      <article class="article-item fade-up" data-url="/post/system-programming/linux-io-model/">
-        <div class="article-date-block">
-          <div class="date-month">Feb</div>
-          <div class="date-day">10</div>
-        </div>
-        <div>
-          <h3 class="article-title">深度解析 Linux I/O 模型：從阻塞到 io_uring</h3>
-          <div class="article-tags">
-            <span class="tag">Linux</span>
-            <span class="tag">系統程式</span>
-          </div>
-        </div>
-        <span class="article-read">18 min</span>
-      </article>
-    </div>
+    <div data-post-list></div>
 
     <!-- Pagination -->
     <div class="pagination">
@@ -410,6 +265,8 @@
   </div>
 </footer>
 
+<script src="js/posts-data.js" defer></script>
+<script src="js/archive.js" defer></script>
 <script src="js/app.js" defer></script>
 </body>
 </html>
