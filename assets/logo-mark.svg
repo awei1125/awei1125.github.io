@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Awei logo mark">
+  <rect width="64" height="64" rx="18" fill="#D97A52"/>
+  <path d="M18 46 29.4 18h5.2L46 46h-6.2l-2.4-6.4H26.3L24 46h-6Zm10-11.5h7.8L32 24.1l-4 10.4Z" fill="#1E1B17"/>
+  <path d="M19 50h26" stroke="#EDE8DE" stroke-width="4" stroke-linecap="round"/>
+</svg>

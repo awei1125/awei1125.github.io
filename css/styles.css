@@ -102,11 +102,13 @@
     align-items: center;
     gap: 8px;
   }
-  .logo-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
+  .logo-mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
     display: inline-block;
+    object-fit: cover;
+    flex-shrink: 0;
   }
   nav {
     display: flex;
