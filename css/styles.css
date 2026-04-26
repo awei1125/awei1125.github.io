@@ -771,6 +771,7 @@
     font-size: 1.2rem;
     font-weight: 500;
     color: white;
+    object-fit: cover;
   }
   .profile-name {
     font-weight: 500;
