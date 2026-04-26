@@ -1230,6 +1230,24 @@
   }
   .toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px); z-index: 400; min-width: 220px; max-width: calc(100vw - 2rem); padding: 0.8rem 1rem; border-radius: 999px; background: var(--accent); color: white; font-family: var(--mono); font-size: 0.78rem; text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .card:focus-visible, .article-item:focus-visible, .recent-item:focus-visible, .tag:focus-visible, .page-btn:focus-visible, .btn-theme:focus-visible, .btn-write:focus-visible, .btn-ghost:focus-visible, .btn-submit:focus-visible, .modal-close:focus-visible, .theme-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .mobile-top-button {
+    display: none;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 250;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--accent);
+    color: white;
+    font-family: var(--mono);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.26);
+  }
+  .card:focus-visible, .article-item:focus-visible, .recent-item:focus-visible, .tag:focus-visible, .page-btn:focus-visible, .btn-theme:focus-visible, .btn-write:focus-visible, .btn-ghost:focus-visible, .btn-submit:focus-visible, .modal-close:focus-visible, .theme-pill:focus-visible, .mobile-top-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   mark.search-hit { background: var(--accent-lt); color: var(--accent); border-radius: 3px; padding: 0 2px; }
-  @media (max-width: 600px) { .search-wrap.open { position: absolute; top: 106px; left: 1rem; right: 1rem; max-width: none; z-index: 150; } .article-modal { max-height: 88vh; } .modal-body, .compose-form { padding: 1.1rem; } .compose-row { grid-template-columns: 1fr; } .compose-actions { flex-direction: column-reverse; } .btn-ghost, .btn-submit { width: 100%; } }
+  @media (max-width: 600px) { .search-wrap.open { position: absolute; top: 106px; left: 1rem; right: 1rem; max-width: none; z-index: 150; } .home-sidebar { display: none; } .mobile-top-button { display: flex; align-items: center; justify-content: center; } .article-modal { max-height: 88vh; } .modal-body, .compose-form { padding: 1.1rem; } .compose-row { grid-template-columns: 1fr; } .compose-actions { flex-direction: column-reverse; } .btn-ghost, .btn-submit { width: 100%; } }

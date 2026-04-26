@@ -464,6 +464,19 @@
     });
   }
 
+  function initMobileTopButton() {
+    if (document.querySelector('.mobile-top-button')) return;
+    const button = document.createElement('button');
+    button.className = 'mobile-top-button';
+    button.type = 'button';
+    button.setAttribute('aria-label', '回到頁面頂端');
+    button.textContent = '↑';
+    button.addEventListener('click', () => {
+      document.getElementById('top')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    document.body.appendChild(button);
+  }
+
   function bindModals() {
     if (!articleModal || !modalBody || !modalClose) {
       composeOpen?.addEventListener('click', openCompose);
@@ -574,6 +587,7 @@
     bindTags();
     bindNav();
     bindSearch();
+    initMobileTopButton();
     bindModals();
     bindComposeForm();
     initAnimations();
