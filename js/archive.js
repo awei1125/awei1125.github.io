@@ -188,6 +188,14 @@
     sections.forEach(section => observer.observe(section));
   }
 
+  function scrollToInitialSection() {
+    if (!window.location.hash) return;
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    const target = document.getElementById(id);
+    if (!target) return;
+    requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+  }
+
   function renderPostDetail() {
     let mount = document.querySelector('[data-post-detail]');
     if (!mount) return;
@@ -220,6 +228,7 @@
       </div>
     `;
     bindTableOfContents(mount);
+    scrollToInitialSection();
   }
 
   renderArchive();
